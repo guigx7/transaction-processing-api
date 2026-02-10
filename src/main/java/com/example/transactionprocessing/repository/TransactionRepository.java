@@ -18,6 +18,15 @@ public class TransactionRepository {
     private final SimpleJdbcCall createTransactionCall;
     private final SimpleJdbcCall updateStatusCall;
 
+    public void updateTransactionStatus(Long transactionId, String status) {
+
+        updateStatusCall.execute(
+                new MapSqlParameterSource()
+                        .addValue("P_TRANSACTION_ID", transactionId)
+                        .addValue("P_STATUS", status)
+        );
+    }
+
     public Long createTransaction(
             String accountFrom,
             String accountTo,
